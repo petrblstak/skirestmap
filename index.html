@@ -3,7 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Map Application</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />   
+        <link rel="stylesheet" href="css/screen.css" />    
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>     
@@ -13,25 +14,28 @@
         <div data-role="page">
 
             <div data-role="header">
-                <h1>Page Title</h1>
+                <h1>Restaurant Map 1.0</h1>
             </div><!-- /header -->
 
             <div data-role="content">	
                 <div class="ui-grid-a">
                     <div class="ui-block-a" data-role="controlgroup">
-                            <a href="index.html" data-theme="a" data-role="button" data-inline="false">MAP</a>
-                            <a href="index.html" data-role="button" data-inline="false">Dist</a>
-                        </div>
-                    <div class="ui-block-b" data-role="controlgroup">
-                        <a href="index.html" data-role="button" data-inline="false">Rank</a>
-                        <a href="index.html" data-role="button" data-inline="false">Cool</a>
+                        <a class="rectangle" href="map.html" data-role="button" data-inline="false">MAP</a>
                     </div>
-                </div><!-- /grid-a -->		
+                    <div class="ui-block-b" data-role="controlgroup">
+                        <a class="rectangle" href="list.html" data-role="button" data-inline="false">Rank</a>
+                    </div>
+                </div><!-- /grid-a -->	                
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" data-role="controlgroup">
+                        <a class="rectangle" href="list.html" data-role="button" data-inline="false">Dist</a>
+                    </div>
+                    <div class="ui-block-b" data-role="controlgroup">
+                        <a class="rectangle" href="list.html" data-role="button" data-inline="false">Cool</a>
+                    </div>
+                </div><!-- /grid-a -->
+                <a class="align-bottom" href="index.html" data-theme="a" data-role="button" data-icon="delete" data-inline="false" data-iconpos="bottom">EXIT</a>
             </div><!-- /content -->
-
-            <div data-role="footer">
-                <h4>Page Footer</h4><br><br>
-            </div><!-- /footer -->
         </div><!-- /page -->
     </body>
 </html>

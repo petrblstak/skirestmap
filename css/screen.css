@@ -1,0 +1,26 @@
+/* 
+    Document   : screen
+    Created on : 11.11.2012, 15:46:03
+    Author     : Petr
+    Description:
+        Style for the main pages
+*/
+
+.rectangle {
+    height: 200px;
+    margin: 5px !important;
+}
+
+.align-bottom {
+    position: absolute !important;
+    bottom: 5px;
+    width: 50%;
+    left: 25%
+}
+
+.footer-bottom{
+    position: absolute !important;
+    bottom: 0px;
+    width: 100%;
+}
+
