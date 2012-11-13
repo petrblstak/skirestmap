@@ -4,11 +4,144 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 
-
 <root>
     <restaurant>
-        <name>pizza</name>
-        <type>western</type>
+        <name>
+            Hyundaimakguksu
+        </name>
+        <type>
+            Korean
+        </type>
+        <tel>
+            033-335-0314
+        </tel>
+        <coordinate>
+            <lat>
+                37.616407
+            </lat>
+            <long>
+                128.377939
+            </long>
+        </coordinate>
+        <grade>
+            3        
+        </grade>
+        <comment>
+            Awesome blah blah blah
+            Awesome blah blah blah
+            Awesome blah blah blah
+        </comment>
     </restaurant>
     
+    <restaurant>
+        <name>
+            Illsongjung
+        </name>
+        <type>
+            Japanese
+        </type>
+        <tel>
+            033-333-7043 
+        </tel>
+        <coordinate>
+            <lat>
+                37.570518
+            </lat>
+            <long>
+                128.345234            
+            </long>
+        </coordinate>
+        <grade>
+            4.5       
+        </grade>
+        <comment>
+            Great blah blah blah
+            Great blah blah blah
+            Great blah blah blah
+        </comment>
+    </restaurant>
+
+    <restaurant>
+        <name>
+            Blue
+        </name>
+        <type>
+            Chinese
+        </type>
+        <tel>
+         	033-330-6023
+        </tel>
+        <coordinate>
+            <lat>
+                37.581551
+            </lat>
+            <long>
+                128.327462
+            </long>
+        </coordinate>
+        <grade>
+            1        
+        </grade>
+        <comment>
+            Bad blah blah blah
+            Bad blah blah blah
+            Bad blah blah blah
+        </comment>
+    </restaurant>
+    
+    <restaurant>
+        <name>
+            Jasmina
+        </name>
+        <type>
+            Korean
+        </type>
+        <tel>
+            033-330-6030
+        </tel>
+        <coordinate>
+            <lat>
+                37.582524
+            </lat>
+            <long>
+                128.326432
+            </long>        
+        </coordinate>
+        <grade>
+            2
+        </grade>
+        <comment>
+            Expensive blah blah blah
+            Expensive blah blah blah
+            Expensive blah blah blah
+        </comment>
+    </restaurant>
+    
+    <restaurant>
+        <name>
+            CastlePine      
+        </name>
+        <type>
+            Western
+        </type>
+        <tel>
+            033-330-6038
+        </tel>
+        <coordinate>
+            <lat>
+                37.582346
+            </lat>
+            <long>
+                128.326631
+            </long>        
+        </coordinate>
+        <grade>
+            0        
+        </grade>
+        <comment>
+            Worst blah blah blah
+            Worst blah blah blah
+            Worst blah blah blah
+        </comment>
+    </restaurant>
 </root>
