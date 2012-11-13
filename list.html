@@ -7,7 +7,19 @@
         <link rel="stylesheet" href="css/screen.css" />    
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>     
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>    
+
+        <script>
+            $(function(){
+                $("body").append('<div data-role="page" id="uploadOptions" data-url="uploadOptions">'
+                    + '<div data-role="content">'
+                    +    '<h1>Upload photos</h1>'
+                    +    '<a href="#" data-role="button" onclick="alert(\'do stuff\');" data-theme="b">Capture</a>'
+                    +    '<a href="#" data-role="button" onclick="alert(\'do stuff\');" data-theme="b">Gallery</a>'
+                    +    '<a href="imagegallery.html" data-rel="back" data-role="button" data-transition="pop" data-direction="reverse">Cancel</a>'
+                    + '</div></div>');
+            });
+        </script>
     </head>
     <body>
 
@@ -15,11 +27,11 @@
 
             <div data-role="header" data-position="fixed">
                 <a href="index.html" data-icon="home">Home</a>
-                <a href="#" data-theme="a">Type</a> 
+                <a href="#uploadOptions" id="uploadOptionsButton" data-role="button" data-rel="dialog">Type</a> 
                 <h1>List</h1>
             </div><!-- /header -->
 
-            <div data-role="content" data-position>	
+            <div data-role="content">	
                 <ul data-role="listview">
                     <li><a href="detail.html">Restaurant</a></li>
                     <li><a href="detail.html">Restaurant</a></li>
@@ -61,7 +73,7 @@
                         <li><a href="list.html" data-icon="star" data-iconpos="bottom">Cool</a></li>
                         <li><a href="map.html" data-icon="star" data-iconpos="bottom">Map</a></li>
                     </ul>
-                </div>  <!-- navbar ë�� -->
+                </div>  <!-- navbar -->
             </div><!-- /content -->
         </div><!-- /page -->
     </body>
