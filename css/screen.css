@@ -6,21 +6,40 @@
         Style for the main pages
 */
 
-.rectangle {
-    height: 200px;
-    margin: 5px !important;
+/*OVERRIDING JQuery CSS*/
+.ui-controlgroup-vertical .ui-btn {
+    margin: 10px;
 }
 
-.align-bottom {
+.ui-grid-a {
+    height: 200px;
+}
+
+/*APPLICATION CSS*/
+.home-menu-btn {
+    height: 100%;
+}
+
+.home-exit-btn {
     position: absolute !important;
     bottom: 5px;
     width: 50%;
     left: 25%
 }
 
+.header-top {
+    height: 42px;
+}
+
 .footer-bottom{
-    position: absolute !important;
-    bottom: 0px;
-    width: 100%;
+    height: 56px;
+}
+
+.map-canvas {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    width:100%; 
+    height:100%;
 }
 

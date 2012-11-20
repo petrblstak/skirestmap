@@ -3,25 +3,109 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Map Application</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />   
-        <link rel="stylesheet" href="css/screen.css" />    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>     
+        <link rel="stylesheet" href="css/screen.css" />
+        <script>
+            var restArray;
+            function load(){
+                //load restaurants
+            }
+            
+            document.addEventListener('DOMContentLoaded', function () {
+                var element = document.createElement('script');
+                element.src = 'https://maps.googleapis.com/maps/api/js?v=3.9&sensor=true&callback=Initialize';
+                element.type = 'text/javascript';
+                var scripts = document.getElementsByTagName('script')[0];
+                scripts.parentNode.insertBefore(element, scripts);
+            }, false);
+            
+            function Initialize() {
+                var myLatlng = new google.maps.LatLng(37.63279,127.077434);
+                var rest1 = new google.maps.LatLng(37.63398,127.070525);
+                var rest2 = new google.maps.LatLng(37.626197,127.074044);
+                var rest3 = new google.maps.LatLng(37.641184,127.083871);
+
+                var mapOptions = {
+                    zoom: 15,
+                    center: myLatlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 6
+                    },
+                    title:"My position"
+                });
+                var marker2 = new google.maps.Marker({
+                    position: rest1,
+                    title:"Noodles"
+                });
+                var marker3 = new google.maps.Marker({
+                    position: rest2,
+                    title:"Mr.Pizza"
+                });
+                var marker4 = new google.maps.Marker({
+                    position: rest3,
+                    title:"Randy's"
+                });
+
+                // To add the marker to the map, call setMap();
+                marker.setMap(map);  
+                marker2.setMap(map); 
+                marker3.setMap(map); 
+                marker4.setMap(map); 
+                
+                var contentString = '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h2 id="firstHeading" class="firstHeading">Mr.Pizza</h2>'+
+                    '<div id="bodyContent">'+
+                    '<p>Address: 1st Street<br/>'+
+                    'Phone: 010-678-345<br/>'+
+                    'Web: www.mrpizza.co.kr<br/>'+
+                    'Ranking: 4<br/>'+
+                    'Type: Western<br/>'+
+                    '<a href="#">Detail...</a><br/>'+
+                    '</p>'+
+                    '</div>'+
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                    maxWidth: 300
+                });
+
+                google.maps.event.addListener(marker3, 'click', function() {
+                    infowindow.open(map,marker3);
+                });
+
+                //Delay customizations until the map has loaded
+                var element = document.createElement('script');
+                element.src = 'template.js';
+                element.type = 'text/javascript';
+                var scripts = document.getElementsByTagName('script')[0];
+                scripts.parentNode.insertBefore(element, scripts);
+            }
+        </script>
     </head>
     <body>
 
         <div data-role="page">
 
-            <div data-role="header" data-position="fixed">
+            <div class="header-top" data-role="header" data-position="fixed">
                 <a href="index.html" data-icon="home">Home</a>
-                <a href="#" data-theme="a">Type</a> 
+                <a href="type.html" data-theme="a">Type</a> 
                 <h1>Map</h1>
             </div><!-- /header -->
 
-            <div data-role="content">	
-                <p><a href="detail.html">Restaurant</a></p>
-            </div><!-- /content -->
+            <div class="map-canvas" id="map_canvas"></div>
 
             <div data-role="footer" data-position="fixed" class="footer-bottom">	
                 <div data-role="navbar">
