@@ -1,9 +1,0 @@
-{
-    "restaurant":[
-        {"name": "Hyundaimakguksu", "type":[{"type": "Korean"}], "tel": "033-335-0314", "coordinate":{"latitude": "37.616407","longitude": "128.377939"}, "grade": "3", "comment":"blah\nbblah\nblah"},
-        {"name": "Ilsongjung", "type":[{"type": "Japanese"}], "tel": "033-333-7043", "coordinate":{"latitude": "37.570518","longitude": "128.345234"}, "grade": "4", "comment":"blah\nbblah\nblah"},
-        {"name": "Blue", "type":[{"type": "Chinese"}], "tel": "033-330-6023", "coordinate":{"latitude": "37.581551","longitude": "128.327462"}, "grade": "1", "comment":"blah\nbblah\nblah"},
-        {"name": "Jasmina", "type":[{"type": "Korean"}, {"type": "Chinese"}, {"type": "Japanese"}], "tel": "033-330-6030", "coordinate":{"latitude": "37.582524","longitude": "128.326432"}, "grade": "2", "comment":"blah\nbblah\nblah"},
-        {"name": "CantlePine", "type":[{"type": "Western"}], "tel": "033-330-6038", "coordinate":{"latitude": "37.582346","longitude": "128.326631"}, "grade": "2", "comment":"blah\nbblah\nblah"},
-        ] 
-}
