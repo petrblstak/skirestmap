@@ -11,13 +11,27 @@
     margin: 10px;
 }
 
-.ui-grid-a {
-    height: 200px;
+/*APPLICATION CSS*/
+.outer {
+    position: relative;
+}
+.square-btn-img{
+    position: relative;
+    visibility: hidden;
+    width: 100%;
+    min-width: 100%;
+}
+.inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow:hidden;
 }
 
-/*APPLICATION CSS*/
-.home-menu-btn {
-    height: 100%;
+.home-menu-btn{
+    height: 83%;
 }
 
 .home-exit-btn {

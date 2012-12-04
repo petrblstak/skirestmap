@@ -3,101 +3,55 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Map Application</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>     
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
         <link rel="stylesheet" href="css/screen.css" />
-        <script>
-            var restArray;
-            function load(){
-                //load restaurants
-            }
-            
-            document.addEventListener('DOMContentLoaded', function () {
-                var element = document.createElement('script');
-                element.src = 'https://maps.googleapis.com/maps/api/js?v=3.9&sensor=true&callback=Initialize';
-                element.type = 'text/javascript';
-                var scripts = document.getElementsByTagName('script')[0];
-                scripts.parentNode.insertBefore(element, scripts);
-            }, false);
-            
-            function Initialize() {
-                var myLatlng = new google.maps.LatLng(37.63279,127.077434);
-                var rest1 = new google.maps.LatLng(37.63398,127.070525);
-                var rest2 = new google.maps.LatLng(37.626197,127.074044);
-                var rest3 = new google.maps.LatLng(37.641184,127.083871);
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+        <script type="text/javascript">
+            function initialize() 
+            {
+                var locations = [
+                    ['Athens Test point 1', 37.9586674,23.7195099, 1],
+                    ['Athens Test Point 2', 38.0457918, 23.7676337, 2]
+                ];
 
-                var mapOptions = {
-                    zoom: 15,
-                    center: myLatlng,
+                var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                    zoom: 12,
+                    center: new google.maps.LatLng(37.9586674, 23.7195099),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) 
+                {  
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent('<div class="iwContainer">' + locations[i][0] + '</div>');
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
                 }
-                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 6
-                    },
-                    title:"My position"
-                });
-                var marker2 = new google.maps.Marker({
-                    position: rest1,
-                    title:"Noodles"
-                });
-                var marker3 = new google.maps.Marker({
-                    position: rest2,
-                    title:"Mr.Pizza"
-                });
-                var marker4 = new google.maps.Marker({
-                    position: rest3,
-                    title:"Randy's"
-                });
-
-                // To add the marker to the map, call setMap();
-                marker.setMap(map);  
-                marker2.setMap(map); 
-                marker3.setMap(map); 
-                marker4.setMap(map); 
-                
-                var contentString = '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h2 id="firstHeading" class="firstHeading">Mr.Pizza</h2>'+
-                    '<div id="bodyContent">'+
-                    '<p>Address: 1st Street<br/>'+
-                    'Phone: 010-678-345<br/>'+
-                    'Web: www.mrpizza.co.kr<br/>'+
-                    'Ranking: 4<br/>'+
-                    'Type: Western<br/>'+
-                    '<a href="#">Detail...</a><br/>'+
-                    '</p>'+
-                    '</div>'+
-                    '</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString,
-                    maxWidth: 300
-                });
-
-                google.maps.event.addListener(marker3, 'click', function() {
-                    infowindow.open(map,marker3);
-                });
-
-                //Delay customizations until the map has loaded
-                var element = document.createElement('script');
-                element.src = 'template.js';
-                element.type = 'text/javascript';
-                var scripts = document.getElementsByTagName('script')[0];
-                scripts.parentNode.insertBefore(element, scripts);
             }
+
+            $(function() { 
+                $('#map_page').live("pageshow", function() {
+                    initialize();
+                });
+            });
         </script>
     </head>
     <body>
-
-        <div data-role="page">
+        <div id="map_page" data-role="page">
 
             <div class="header-top" data-role="header" data-position="fixed">
                 <a href="index.html" data-icon="home">Home</a>
@@ -107,7 +61,7 @@
 
             <div class="map-canvas" id="map_canvas"></div>
 
-            <div data-role="footer" data-position="fixed" class="footer-bottom">	
+            <div class="footer-bottom" data-role="footer" data-position="fixed">	
                 <div data-role="navbar">
                     <ul>
                         <li><a href="list.html" data-icon="star" data-iconpos="bottom">Dist</a></li>
@@ -116,6 +70,7 @@
                     </ul>
                 </div>  <!-- navbar -->
             </div><!-- /content -->
+
         </div><!-- /page -->
     </body>
 </html>
