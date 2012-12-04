@@ -1,9 +1,132 @@
 {
     "restaurant":[
-        {"name": "Hyundaimakguksu", "type":[{"type": "Korean"}], "tel": "033-335-0314", "coordinate":{"latitude": "37.616407","longitude": "128.377939"}, "grade": "3", "comment":"blah\nbblah\nblah"},
-        {"name": "Ilsongjung", "type":[{"type": "Japanese"}], "tel": "033-333-7043", "coordinate":{"latitude": "37.570518","longitude": "128.345234"}, "grade": "4", "comment":"blah\nbblah\nblah"},
-        {"name": "Blue", "type":[{"type": "Chinese"}], "tel": "033-330-6023", "coordinate":{"latitude": "37.581551","longitude": "128.327462"}, "grade": "1", "comment":"blah\nbblah\nblah"},
-        {"name": "Jasmina", "type":[{"type": "Korean"}, {"type": "Chinese"}, {"type": "Japanese"}], "tel": "033-330-6030", "coordinate":{"latitude": "37.582524","longitude": "128.326432"}, "grade": "2", "comment":"blah\nbblah\nblah"},
-        {"name": "CantlePine", "type":[{"type": "Western"}], "tel": "033-330-6038", "coordinate":{"latitude": "37.582346","longitude": "128.326631"}, "grade": "2", "comment":"blah\nbblah\nblah"},
+        {
+            "name": "Hyun Dai Mak Guk Su",
+            "type":["Korean"],
+            "tel": "033-335-0314", 
+            "coordinate":{"latitude": 37.616407,"longitude": 128.377939}, 
+            "grade": 3, 
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Il Song Jung", 
+            "type":["Japanese"], 
+            "tel": "033-333-7043", 
+            "coordinate":{"latitude": 37.570518,"longitude": 128.345234}, 
+            "grade": 5, 
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Blue", 
+            "type":["Chinese"], 
+            "tel": "033-330-6023", 
+            "coordinate":{"latitude": 37.581551,"longitude": 128.327462}, 
+            "grade": 1, 
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Jasmina",
+            "type":["Korean", "Chinese", "Japanese"], 
+            "tel": "033-330-6030", 
+            "coordinate":{"latitude": 37.582524,"longitude": 128.326432},
+            "grade": 2, 
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "CantlePine", 
+            "type":["Western"],
+            "tel": "033-330-6038", 
+            "coordinate":{"latitude": 37.582346,"longitude": 128.326631},
+            "grade": 2,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Da Rae", 
+            "type":["Korean", "Western"],
+            "tel": "033-333-1288", 
+            "coordinate":{"latitude": 37.586308,"longitude": 128.323723},
+            "grade": 5,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Shin Byul Mi Won", 
+            "type":["Korean", "Western", "Japanese"],
+            "tel": "033-333-1288", 
+            "coordinate":{"latitude": 37.587396,"longitude": 128.321688},
+            "grade": 5,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Hang Chon", 
+            "type":["Korean"],
+            "tel": "033-334-5760", 
+            "coordinate":{"latitude": 37.587677,"longitude": 128.312399},
+            "grade": 2,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Ung Ter Ri Saeng Go Gi", 
+            "type":["Korean", "Western"],
+            "tel": "033-332-0797", 
+            "coordinate":{"latitude": 37.585683,"longitude": 128.325698},
+            "grade": 3,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "E Chun Sal Bab Jip", 
+            "type":["Korean"],
+            "tel": "033-333-3363", 
+            "coordinate":{"latitude": 37.567767,"longitude": 128.347831},
+            "grade": 3,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Bong Pyung Ja Gum Sung", 
+            "type":["Chinese"],
+            "tel": "033-335-5115", 
+            "coordinate":{"latitude": 37.615581,"longitude": 128.377778},
+            "grade": 3,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Hwang Gung Jaeng Ban Ja Jang", 
+            "type":["Chinese"],
+            "tel": "033-334-4880", 
+            "coordinate":{"latitude": 37.587084,"longitude": 128.322013},
+            "grade": 3,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Jin Mi Sik Dang", 
+            "type":["Korean"],
+            "tel": "033-335-0242", 
+            "coordinate":{"latitude": 37.618884,"longitude": 128.376904},
+            "grade": 2,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Mi Ga Yun", 
+            "type":["Korean"],
+            "tel": "033-335-8805", 
+            "coordinate":{"latitude": 37.616654,"longitude": 128.377765},
+            "grade": 2,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Dul An Chae", 
+            "type":["Korean"],
+            "tel": "033-334-6665", 
+            "coordinate":{"latitude": 37.592948,"longitude": 128.317984},
+            "grade": 4,
+            "comment":"blah\nbblah\nblah"
+            },
+        {
+            "name": "Hung Bu Ne", 
+            "type":["Korean", "Chinese"],
+            "tel": "033-333-1620", 
+            "coordinate":{"latitude": 37.584597,"longitude": 128.414195},
+            "grade": 2,
+            "comment":"blah\nbblah\nblah"
+            }
         ] 
 }
