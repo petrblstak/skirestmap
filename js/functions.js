@@ -8,7 +8,9 @@ var list_ref = new Array(); // reference of 'list' variable
 $(function() { 
     $('#map_page').live("pageshow", function() {
         initialize();
-        alert("rlist.restaurant[0].name");
+    });
+    $('#list_page').live("pageshow", function() {
+        makelist();
     });
 });
 
@@ -102,3 +104,24 @@ function sortListAlphabetically()
         }
     }
 } // sortListAlphabetically
+
+// wait for the page to load
+function makelist(){
+    
+    $.getJSON('doc/list.json', function(data)
+    {
+        var rlist = clone(data, false); 
+        
+        var list = document.createElement("ul");
+        
+        for (var i=0, len = rlist.restaurant.length; i < len; ++i) {
+            var row = document.createElement("li");
+            row.appendChild(document.createTextNode(rlist.restaurant[i].name));
+            list.appendChild(row);
+        }
+
+        document.getElementById("restaurant_list").appendChild(list);
+
+    });
+
+}
