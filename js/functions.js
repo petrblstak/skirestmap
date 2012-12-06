@@ -4,12 +4,13 @@
 //global variables
 var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
+var types = new Array(1,1,1,1); //korean, chinesse, japanese, ewstern
 
 $(function() { 
     $('#map_page').live("pageshow", function() {
         initialize();
     });
-    $('#list_page').live("pageshow", function() {
+    $('#list_page').live("pagecreate", function() {
         showRestList();
     });
     initRestList();
@@ -48,47 +49,15 @@ function initialize()
     }
 }
 
-
-function storeTypes()
+function sortList(type)
 {
-    
-}
-
-function loadDetail(number){
-    
-}
-
-function clone (obj, deep) { 
-    var objectClone = new obj.constructor(); 
-    for (var property in obj) 
-        if (!deep) 
-            objectClone[property] = obj[property]; 
-        else if (typeof obj[property] == 'object') 
-            objectClone[property] = obj[property].clone(deep); 
-        else 
-            objectClone[property] = obj[property]; 
-    return objectClone; 
-} // clone
-
-function loadListJSON()
-{
-    $.getJSON('doc/list.json', function(data)
-    {
-        rlist = clone(data, false);     
-    });
-   
-    //var arrayLength = list.restaurant.length;
     for(var i = 0; i < rlist.restaurant.length; i++)
         list_ref[i] = i;
     
-} // loadListJson
-
-function sortList(type)
-{
     var array_length = rlist.restaurant.length;
     
     if(type == 0) // Alphabetical Order
-    {        
+    {
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
@@ -102,7 +71,6 @@ function sortList(type)
                 }
             }
         }
-        alert("asdasd "+list_ref.length);
     }
     else if(type == 1) // Ascending Distance Order
     {
@@ -161,29 +129,17 @@ function initRestList(){
     { 
         rlist = jQuery.extend(true, {}, data);
     });
-    for(var i = 0; i < rlist.restaurant.length; i++)
-        list_ref[i] = i;
-}
-
-function setMyAttributes(el, attrs) {
-  for(var key in attrs) {
-    el.setAttribute(key, attrs[key]);
-  }
 }
 
 function showRestList(){   
-        
-    var list = document.createElement("ul");
+    var elem = document.getElementById("restaurant_list");    
         
     for (var i=0, len = list_ref.length; i < len; ++i) {
         var row = document.createElement("li");
         var link = document.createElement("a");
-        list.setAttribute("href","detail.html");
-        link.setAttribute("data-role","button");
+        link.setAttribute("href","detail.html");
         link.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
         row.appendChild(link);
-        list.appendChild(row);
-    }
-    
-    document.getElementById("restaurant_list").appendChild(list);
+        elem.appendChild(row);
+    }    
 }
