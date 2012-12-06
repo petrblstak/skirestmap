@@ -12,6 +12,7 @@ $(function() {
     $('#list_page').live("pageshow", function() {
         makelist();
     });
+
 });
 
 function initialize() 
@@ -57,11 +58,6 @@ function loadDetail(number){
     
 }
 
-function temp()
-{
-    alert(rlist.restaurant[0].name);
-} // temp
-
 function clone (obj, deep) { 
     var objectClone = new obj.constructor(); 
     for (var property in obj) 
@@ -78,50 +74,102 @@ function loadListJSON()
 {
     $.getJSON('doc/list.json', function(data)
     {
-        rlist = clone(data, false);        
+        rlist = clone(data, false);     
     });
    
-    //var arrayLength = list.restaurant.length;
+//var arrayLength = list.restaurant.length;
     
-    for(var i = 0; i < list.restaurant.length; i++)
-        list_ref[i] = i+1;
+//for(var i = 0; i < list.restaurant.length; i++)
+//list_ref[i] = i+1;
     
 } // loadListJson
 
-function sortListAlphabetically()
+function sortList(type, array_length)
 {
-    for (var i = 0; i < list.restaurant.length; i++)
+    if(type == 0) // Alphabetical Order
     {
-        for(var j = i+1; j < list.restaurant.length; j++)
+        for (var i = 0; i < array_length; i++)
         {
-            if(list.restaurant[list_ref[i]].name > list.restaurant[list_ref[j]].name)
+            for(var j = i+1; j < array_length; j++)
             {
-                var temp;
-                temp = list_ref[i];
-                list_ref[i] = list_ref[j];
-                list_ref[j] = temp;
+                if(list.restaurant[list_ref[i]].name > list.restaurant[list_ref[j]].name)
+                {
+                    var temp;
+                    temp = list_ref[i];
+                    list_ref[i] = list_ref[j];
+                    list_ref[j] = temp;
+                }
+            }
+        }
+    }
+    else if(type == 1) // Ascending Distance Order
+    {
+        // need to get a location data(var whereIAM[2]) where the user is now. whereIAm[0] => latitude, whereIAm[1] = longitude
+        var whereIAm = new Array();
+        
+        for(var i = 0; i < array_length; i++)
+        {
+            var x0, y0; // x0, y0 is whereIAm(the locationg where the user is)    
+            var x1, y1;
+            x1 = list.restaurant[list_ref[i]].coordinate.latitude;
+            y1 = list.restaurant[list_ref[i]].coordinate.longitude;               
+            var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
+            distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+                
+            for(var j = i + 1; j < array_length; j++)
+            {
+                var distance_i;
+                x1 = whereIAm[0];
+                y1 = whereIAm[1];
+                x1 = list.restaurant[list_ref[j]].coordinate.latitude;
+                y1 = list.restaurant[list_ref[j]].coordinate.latitude;
+                distance_j = Math.sqrt((x1 - x0)*(x1 - x0) + (y1 - y0)*(y1 - y0));
+                        
+                if(distance_i > distance_j)
+                {
+                    var temp;
+                    list_ref[i] = temp;
+                    list_ref[i] = list_ref[j];
+                    list_ref[j] = temp;
+                }
+            }
+        }
+    }
+    else if(type == 2) // Ascending Rank Order
+    { 
+        for (var i = 0; i < array_length; i++)
+        {
+            for(var j = i+1; j < array_length; j++)
+            {
+                if(list.restaurant[list_ref[i]].rank > list.restaurant[list_ref[j]].rank)
+                {
+                    var temp;
+                    temp = list_ref[i];
+                    list_ref[i] = list_ref[j];
+                    list_ref[j] = temp;
+                }
             }
         }
     }
 } // sortListAlphabetically
-
-// wait for the page to load
-function makelist(){
     
+// wait for the page to load
+function makelist2(){    
     $.getJSON('doc/list.json', function(data)
-    {
-        var rlist = clone(data, false); 
-        
-        var list = document.createElement("ul");
-        
-        for (var i=0, len = rlist.restaurant.length; i < len; ++i) {
-            var row = document.createElement("li");
-            row.appendChild(document.createTextNode(rlist.restaurant[i].name));
-            list.appendChild(row);
-        }
-
-        document.getElementById("restaurant_list").appendChild(list);
-
+    { 
+        rlist = jQuery.extend(true, {}, data);
     });
+}
 
+function showList(){   
+        
+    var list = document.createElement("ul");
+        
+    for (var i=0, len = rlist.restaurant.length; i < len; ++i) {
+        var row = document.createElement("li");
+        row.appendChild(document.createTextNode(rlist.restaurant[i].name));
+        list.appendChild(row);
+    }
+
+    document.getElementById("restaurant_list").appendChild(list);
 }
