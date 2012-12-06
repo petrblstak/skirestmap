@@ -110,13 +110,19 @@ function sortList(type)
     }
     else if(type == 1) // Ascending Distance Order
     {
+        alert("1");
         // need to get a location data(var whereIAM[2]) where the user is now. whereIAm[0] => latitude, whereIAm[1] = longitude
         var whereIAm = new Array();
+        whereIAm[0] = 0; // temporarily
+        whereIAm[1] = 0; // temporarily
         
         for(var i = 0; i < array_length; i++)
         {
             var x0, y0; // x0, y0 is whereIAm(the locationg where the user is)    
             var x1, y1;
+            x0 = whereIAm[0];
+            y0 = whereIAm[1];
+            y0 = 0;
             x1 = rlist.restaurant[list_ref[i]].coordinate.latitude;
             y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;               
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
@@ -124,9 +130,7 @@ function sortList(type)
                 
             for(var j = i + 1; j < array_length; j++)
             {
-                var distance_i;
-                x1 = whereIAm[0];
-                y1 = whereIAm[1];
+                var distance_j;
                 x1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
                 y1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
                 distance_j = Math.sqrt((x1 - x0)*(x1 - x0) + (y1 - y0)*(y1 - y0));
@@ -143,6 +147,7 @@ function sortList(type)
     }
     else if(type == 2) // Dedscending Rank Order
     { 
+        alert("descending rank order");
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
