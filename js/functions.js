@@ -10,9 +10,9 @@ $(function() {
         initialize();
     });
     $('#list_page').live("pageshow", function() {
-        makelist();
+        showRestList();
     });
-
+    initRestList();
 });
 
 function initialize() 
@@ -154,14 +154,14 @@ function sortList(type, array_length)
 } // sortListAlphabetically
     
 // wait for the page to load
-function makelist2(){    
+function initRestList(){    
     $.getJSON('doc/list.json', function(data)
     { 
         rlist = jQuery.extend(true, {}, data);
     });
 }
 
-function showList(){   
+function showRestList(){   
         
     var list = document.createElement("ul");
         
