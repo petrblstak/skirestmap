@@ -6,6 +6,8 @@ var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
 var types = new Array(1,1,1,1); //"Korean", "Chinese", "Japanese", "Western" // 0 is unchecked, 1 is checked
 var actualRest = null;
+var map;
+var pos;
 
 $(function() { 
     $('#map_page').live("pageshow", function() {
@@ -20,37 +22,51 @@ $(function() {
     initRestList();
 });
 
-function initialize() 
-{
-    var locations = [
-    ['Athens Test point 1', 37.9586674,23.7195099, 1],
-    ['Athens Test Point 2', 38.0457918, 23.7676337, 2]
-    ];
-
-    var map = new google.maps.Map(document.getElementById('map_canvas'), {
-        zoom: 12,
-        center: new google.maps.LatLng(37.9586674, 23.7195099),
+function initialize() {
+    var mapOptions = {
+        zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
+    };
+    map = new google.maps.Map(document.getElementById('map_canvas'),
+        mapOptions);
 
-    var infowindow = new google.maps.InfoWindow();
+    // Try HTML5 geolocation
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            pos = new google.maps.LatLng(position.coords.latitude,
+                position.coords.longitude);
 
-    var marker, i;
+            var infowindow = new google.maps.InfoWindow({
+                map: map,
+                position: pos,
+                content: 'Location found using HTML5.'
+            });
 
-    for (i = 0; i < locations.length; i++) 
-    {  
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-            map: map
+            map.setCenter(pos);
+        }, function() {
+            handleNoGeolocation(true);
         });
-
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infowindow.setContent('<div class="iwContainer">' + locations[i][0] + '</div>');
-                infowindow.open(map, marker);
-            }
-        })(marker, i));
+    } else {
+        // Browser doesn't support Geolocation
+        handleNoGeolocation(false);
     }
+}
+
+function handleNoGeolocation(errorFlag) {
+    if (errorFlag) {
+        var content = 'Error: The Geolocation service failed.';
+    } else {
+        var content = 'Error: Your browser doesn\'t support geolocation.';
+    }
+
+    var options = {
+        map: map,
+        position: new google.maps.LatLng(60, 105),
+        content: content
+    };
+
+    var infowindow = new google.maps.InfoWindow(options);
+    map.setCenter(options.position);
 }
 
 function sortList(type)
