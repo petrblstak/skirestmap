@@ -5,10 +5,14 @@
 var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
 var types = new Array(1,1,1,1); //korean, chinesse, japanese, ewstern
+var actualRest = null;
 
 $(function() { 
     $('#map_page').live("pageshow", function() {
         initialize();
+    });
+    $('#detail_page').live("pagecreate", function() {
+        showDetail();
     });
     $('#list_page').live("pagecreate", function() {
         showRestList();
@@ -143,8 +147,20 @@ function showRestList(){
         var row = document.createElement("li");
         var link = document.createElement("a");
         link.setAttribute("href","detail.html");
+        link.setAttribute("id",i);
+        link.setAttribute("onclick","setActualRest()");
         link.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
         row.appendChild(link);
         elem.appendChild(row);
     }    
+}
+function setActualRest(){    
+    actualRest = event.target.id;
+}
+
+function showDetail(){
+    var restaurant = rlist.restaurant[list_ref[actualRest]];
+    document.getElementById("detail_title").appendChild(document.createTextNode(restaurant.name));
+    var content = "Phone: "+restaurant.tel+"\nRanking: "+restaurant.grade+"\nType: "+restaurant.type[0]+"\nCoordinates: "+restaurant.coordinate.latitude+", "+restaurant.coordinate.longitude+"\n\nReview:\n"+restaurant.comment;
+    document.getElementById("detail_content").innerText = content; 
 }
