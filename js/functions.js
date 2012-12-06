@@ -88,7 +88,7 @@ function sortList(type)
     var array_length = rlist.restaurant.length;
     
     if(type == 0) // Alphabetical Order
-    {
+    {        
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
@@ -102,6 +102,7 @@ function sortList(type)
                 }
             }
         }
+        alert("asdasd "+list_ref.length);
     }
     else if(type == 1) // Ascending Distance Order
     {
@@ -164,16 +165,25 @@ function initRestList(){
         list_ref[i] = i;
 }
 
+function setMyAttributes(el, attrs) {
+  for(var key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+}
+
 function showRestList(){   
         
     var list = document.createElement("ul");
-    
         
     for (var i=0, len = list_ref.length; i < len; ++i) {
         var row = document.createElement("li");
-        row.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
+        var link = document.createElement("a");
+        list.setAttribute("href","detail.html");
+        link.setAttribute("data-role","button");
+        link.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
+        row.appendChild(link);
         list.appendChild(row);
     }
-
+    
     document.getElementById("restaurant_list").appendChild(list);
 }
