@@ -77,16 +77,15 @@ function loadListJSON()
         rlist = clone(data, false);     
     });
    
-//var arrayLength = list.restaurant.length;
-    
-//for(var i = 0; i < list.restaurant.length; i++)
-//list_ref[i] = i+1;
+    //var arrayLength = list.restaurant.length;
+    for(var i = 0; i < rlist.restaurant.length; i++)
+        list_ref[i] = i;
     
 } // loadListJson
 
 function sortList(type)
 {
-    var array_length = list.restaurant.length;
+    var array_length = rlist.restaurant.length;
     
     if(type == 0) // Alphabetical Order
     {
@@ -94,7 +93,7 @@ function sortList(type)
         {
             for(var j = i+1; j < array_length; j++)
             {
-                if(list.restaurant[list_ref[i]].name > list.restaurant[list_ref[j]].name)
+                if(rlist.restaurant[list_ref[i]].name > rlist.restaurant[list_ref[j]].name)
                 {
                     var temp;
                     temp = list_ref[i];
@@ -113,8 +112,8 @@ function sortList(type)
         {
             var x0, y0; // x0, y0 is whereIAm(the locationg where the user is)    
             var x1, y1;
-            x1 = list.restaurant[list_ref[i]].coordinate.latitude;
-            y1 = list.restaurant[list_ref[i]].coordinate.longitude;               
+            x1 = rlist.restaurant[list_ref[i]].coordinate.latitude;
+            y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;               
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
             distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
                 
@@ -123,8 +122,8 @@ function sortList(type)
                 var distance_i;
                 x1 = whereIAm[0];
                 y1 = whereIAm[1];
-                x1 = list.restaurant[list_ref[j]].coordinate.latitude;
-                y1 = list.restaurant[list_ref[j]].coordinate.latitude;
+                x1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
+                y1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
                 distance_j = Math.sqrt((x1 - x0)*(x1 - x0) + (y1 - y0)*(y1 - y0));
                         
                 if(distance_i > distance_j)
@@ -143,7 +142,7 @@ function sortList(type)
         {
             for(var j = i+1; j < array_length; j++)
             {
-                if(list.restaurant[list_ref[i]].rank < list.restaurant[list_ref[j]].rank)
+                if(rlist.restaurant[list_ref[i]].rank < rlist.restaurant[list_ref[j]].rank)
                 {
                     var temp;
                     temp = list_ref[i];
@@ -161,15 +160,18 @@ function initRestList(){
     { 
         rlist = jQuery.extend(true, {}, data);
     });
+    for(var i = 0; i < rlist.restaurant.length; i++)
+        list_ref[i] = i;
 }
 
 function showRestList(){   
         
     var list = document.createElement("ul");
+    
         
-    for (var i=0, len = rlist.restaurant.length; i < len; ++i) {
+    for (var i=0, len = list_ref.length; i < len; ++i) {
         var row = document.createElement("li");
-        row.appendChild(document.createTextNode(rlist.restaurant[i].name));
+        row.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
         list.appendChild(row);
     }
 
