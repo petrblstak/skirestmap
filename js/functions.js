@@ -4,7 +4,7 @@
 //global variables
 var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
-var types = new Array(1,1,1,1); //korean, chinesse, japanese, ewstern
+var types = new Array(1,1,1,1); //"Korean", "Chinese", "Japanese", "Western" // 0 is unchecked, 1 is checked
 var actualRest = null;
 
 $(function() { 
@@ -55,10 +55,43 @@ function initialize()
 
 function sortList(type)
 {
+    var count = 0;
     for(var i = 0; i < rlist.restaurant.length; i++)
-        list_ref[i] = i;
-    
-    var array_length = rlist.restaurant.length;
+    {
+        var temp_array = new Array(0, 0, 0, 0);
+        
+        for(var j = 0; j < rlist.restaurant[i].type.length; j++)
+        {
+            if(rlist.restaurant[i].type[j] == "Korean")
+            {
+                temp_array[0] = 1;
+                break;
+            }    
+            else if(rlist.restaurant[i].type[j] == "Chinese")
+            {
+                temp_array[1] = 1;
+                break;
+            }
+            else if(rlist.restaurant[i].type[j] == "Japanese")
+            {
+                temp_array[2] = 1;
+                break;
+            }
+            else if(rlist.restaurant[i].type[j] == "Western")
+            {
+                temp_array[3] = 1;
+                break;
+            }
+        }
+        
+        if(temp_array[0] == types[0] || temp_array[1] == types[1] || temp_array[2] == type[2] || temp_array[3] == type[3])
+        {
+            list_ref[count] = i;
+            count++;
+        }
+    }
+
+    var array_length = count;
     
     if(type == 0) // Alphabetical Order
     {
@@ -90,7 +123,6 @@ function sortList(type)
             var x1, y1;
             x0 = whereIAm[0];
             y0 = whereIAm[1];
-            y0 = 0;
             x1 = rlist.restaurant[list_ref[i]].coordinate.latitude;
             y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;               
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
