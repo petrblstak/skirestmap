@@ -85,14 +85,19 @@ function loadListJSON()
 
 function sortList(type)
 {
+    for(var i = 0; i < rlist.restaurant.length; i++)
+        list_ref[i] = i;
+    
     var array_length = rlist.restaurant.length;
     
     if(type == 0) // Alphabetical Order
     {
+        alert("alpha");
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
             {
+                alert(i + ',' + list_ref[i]);
                 if(rlist.restaurant[list_ref[i]].name > rlist.restaurant[list_ref[j]].name)
                 {
                     var temp;
@@ -160,8 +165,6 @@ function initRestList(){
     { 
         rlist = jQuery.extend(true, {}, data);
     });
-    for(var i = 0; i < rlist.restaurant.length; i++)
-        list_ref[i] = i;
 }
 
 function showRestList(){   
