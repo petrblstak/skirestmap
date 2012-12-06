@@ -81,8 +81,10 @@ function loadListJSON()
     
 } // loadListJson
 
-function sortList(type, array_length)
+function sortList(type)
 {
+    var array_length = list.restaurant.length;
+    
     if(type == 0) // Alphabetical Order
         {
             for (var i = 0; i < array_length; i++)
@@ -132,13 +134,13 @@ function sortList(type, array_length)
                     }
             }
     }
-    else if(type == 2) // Ascending Rank Order
+    else if(type == 2) // Dedscending Rank Order
     { 
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
             {
-                if(list.restaurant[list_ref[i]].rank > list.restaurant[list_ref[j]].rank)
+                if(list.restaurant[list_ref[i]].rank < list.restaurant[list_ref[j]].rank)
                 {
                     var temp;
                     temp = list_ref[i];
