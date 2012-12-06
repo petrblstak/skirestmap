@@ -11,38 +11,42 @@ var pos;
 
 $(function() { 
     $('#map_page').live("pageshow", function() {
-        initialize();
+        mapInit();
     });
     $('#detail_page').live("pagecreate", function() {
-        showDetail();
+        showDetail(); 
+        showcoord();
     });
     $('#list_page').live("pagecreate", function() {
         showRestList();
     });
     initRestList();
+    initialize();
 });
 
-function initialize() {
+function mapInit() {
     var mapOptions = {
         zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
+        
+    map.setCenter(pos);
+}
 
-    // Try HTML5 geolocation
+function initialize() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             pos = new google.maps.LatLng(position.coords.latitude,
-                position.coords.longitude);
-
+                position.coords.longitude);  
+                
             var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: pos,
                 content: 'Location found using HTML5.'
             });
 
-            map.setCenter(pos);
         }, function() {
             handleNoGeolocation(true);
         });
@@ -211,4 +215,8 @@ function showDetail(){
     document.getElementById("detail_title").appendChild(document.createTextNode(restaurant.name));
     var content = "Phone: "+restaurant.tel+"\nRanking: "+restaurant.grade+"\nType: "+restaurant.type[0]+"\nCoordinates: "+restaurant.coordinate.latitude+", "+restaurant.coordinate.longitude+"\n\nReview:\n"+restaurant.comment;
     document.getElementById("detail_content").innerText = content; 
+}
+
+function showcoord(){    
+    alert(pos.lat()+" "+pos.lng()); 
 }
