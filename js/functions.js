@@ -109,48 +109,42 @@ function handleNoGeolocation(errorFlag) {
 function sortList(type)
 {
     var count = 0;
-    for(var i = 0; i < rlist.restaurant.length; i++)
+    var i,j, temp;
+    var fresh_list = new Array();
+    var type_key = {
+        'Korean': 0,
+        'Chinese': 1,
+        'Japanese': 2,
+        'Western': 3
+    };
+    for(i = 0; i < rlist.restaurant.length; i++)
     {
-        var temp_array = new Array(0, 0, 0, 0);
-        
-        for(var j = 0; j < rlist.restaurant[i].type.length; j++)
+        var add = false;        
+        for(j = 0; j < rlist.restaurant[i].type.length; j++)
         {
-            if(rlist.restaurant[i].type[j] == "Korean")
+            if(types[type_key[rlist.restaurant[i].type[j]]])
             {
-                temp_array[0] = 1;
-            }    
-            else if(rlist.restaurant[i].type[j] == "Chinese")
-            {
-                temp_array[1] = 1;
+                add = true;
+                break;
             }
-            else if(rlist.restaurant[i].type[j] == "Japanese")
-            {
-                temp_array[2] = 1;
-            }
-            else if(rlist.restaurant[i].type[j] == "Western")
-            {
-                temp_array[3] = 1;
-            }
-        }
-        
-        if(temp_array[0] == types[0] || temp_array[1] == types[1] || temp_array[2] == types[2] || temp_array[3] == types[3])
+        }        
+        if(add)
         {
-            list_ref[count] = i;
+            fresh_list[count] = i;
             count++;
         }
     }
-
+    list_ref = fresh_list;
     var array_length = count;
     
     if(type == 0) // Alphabetical Order
     {
-        for (var i = 0; i < array_length; i++)
+        for (i = 0; i < array_length; i++)
         {
-            for(var j = i+1; j < array_length; j++)
+            for(j = i+1; j < array_length; j++)
             {
                 if(rlist.restaurant[list_ref[i]].name > rlist.restaurant[list_ref[j]].name)
                 {
-                    var temp;
                     temp = list_ref[i];
                     list_ref[i] = list_ref[j];
                     list_ref[j] = temp;
@@ -166,7 +160,7 @@ function sortList(type)
         whereIAm[0] = 0; // temporarily
         whereIAm[1] = 0; // temporarily
         
-        for(var i = 0; i < array_length; i++)
+        for(i = 0; i < array_length; i++)
         {
             var x0, y0; // x0, y0 is whereIAm(the locationg where the user is)    
             var x1, y1;
@@ -177,7 +171,7 @@ function sortList(type)
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
             distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
                 
-            for(var j = i + 1; j < array_length; j++)
+            for(j = i + 1; j < array_length; j++)
             {
                 var distance_j;
                 x1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
@@ -186,7 +180,6 @@ function sortList(type)
                         
                 if(distance_i > distance_j)
                 {
-                    var temp;
                     temp = list_ref[i];
                     list_ref[i] = list_ref[j];
                     list_ref[j] = temp;
@@ -198,13 +191,12 @@ function sortList(type)
     }
     else if(type == 2) // Descending Rank Order
     { 
-        for (var i = 0; i < array_length; i++)
+        for (i = 0; i < array_length; i++)
         {
-            for(var j = i+1; j < array_length; j++)
+            for(j = i+1; j < array_length; j++)
             {
                 if(rlist.restaurant[list_ref[i]].grade < rlist.restaurant[list_ref[j]].grade)
                 {
-                    var temp;
                     temp = list_ref[i];
                     list_ref[i] = list_ref[j];
                     list_ref[j] = temp;
