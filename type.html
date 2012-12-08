@@ -3,47 +3,36 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Map Application</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />   
-        <link rel="stylesheet" href="css/screen.css" />    
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>   
-        <script>
-            
-            //load types
-        </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+        <link rel="stylesheet" href="css/screen.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>  
+        <script type="text/javascript" src="js/functions.js" ></script>
     </head>
     <body>
-
-        <div data-role="page">
-
-            <div data-role="header" data-position="fixed">
+        <div id="type_page" data-role="page">
+            <div data-role="header">
                 <h1>Select Type</h1>
             </div><!-- /header -->
 
-            <div data-role="content">	
+            <div data-role="content">
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
-                        <input data-theme="b" type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+                        <input data-theme="b" type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" onchange="typeChanged(0)"/>
                         <label for="checkbox-1">Korean</label>
-                        <input data-theme="b" type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" />
+                        <input data-theme="b" type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" onchange="typeChanged(1)"/>
                         <label for="checkbox-2">Chinese</label>
-                        <input data-theme="b" type="checkbox" name="checkbox-3" id="checkbox-3" class="custom" />
+                        <input data-theme="b" type="checkbox" name="checkbox-3" id="checkbox-3" class="custom" onchange="typeChanged(2)"/>
                         <label for="checkbox-3">Japanese</label>
-                        <input data-theme="b" type="checkbox" name="checkbox-4" id="checkbox-4" class="custom" />
+                        <input data-theme="b" type="checkbox" name="checkbox-4" id="checkbox-4" class="custom" onchange="typeChanged(3)"/>
                         <label for="checkbox-4">Western</label>
-                        <a data-theme="a" href="map.html" data-role="button" data-inline="false" onclick="storeTypes()">OK</a>
+                        <a data-theme="a" href="javascript:void(0)" data-role="button" data-inline="false" onclick="sortList(sorting)" data-rel="back">OK</a>
                     </fieldset>
                 </div>
-            </div><!-- /content -->
+            </div>
 
-            <div data-role="footer" data-position="fixed">	
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#" data-icon="star" data-iconpos="bottom" data-rel="back">OK</a></li>
-                    </ul>
-                </div>  <!-- navbar -->
-            </div><!-- /content -->
         </div><!-- /page -->
     </body>
 </html>

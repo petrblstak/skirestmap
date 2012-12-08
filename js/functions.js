@@ -21,6 +21,9 @@ $(function() {
     $('#list_page').live("pagecreate", function() {
         showRestList();
     });
+    $('#type_page').live("pagecreate", function() {
+        setCheckboxes();
+    });
     initRestList();
     initialize();
 });
@@ -197,7 +200,6 @@ function sortList(type)
     }
     else if(type == 2) // Dedscending Rank Order
     { 
-        alert("descending rank order");
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
@@ -254,4 +256,15 @@ function showDetail(){
 
 function showcoord(){    
     alert(pos.lat()+" "+pos.lng()); 
+}
+
+function typeChanged(number){
+    types[number] = !types[number];
+}
+
+function setCheckboxes(){
+    $("#checkbox-1").attr("checked",types[0]);
+    $("#checkbox-2").attr("checked",types[1]);
+    $("#checkbox-3").attr("checked",types[2]);
+    $("#checkbox-4").attr("checked",types[3]);
 }
