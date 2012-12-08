@@ -161,8 +161,10 @@ function sortList(type)
     {
         // need to get a location data(var whereIAM[2]) where the user is now. whereIAm[0] => latitude, whereIAm[1] = longitude
         var whereIAm = new Array();
-        whereIAm[0] = 0; // temporarily
-        whereIAm[1] = 0; // temporarily
+        whereIAm[0] = pos.lat();
+        whereIAm[1] = pos.lng();
+        //whereIAm[0] = 0; // temporarily
+        //whereIAm[1] = 0; // temporarily
         
         for(i = 0; i < array_length; i++)
         {
@@ -174,7 +176,9 @@ function sortList(type)
             y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;   
             
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
-            distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+            
+            // distance in meter = x degree * (3600' / 1 degree) * (30.864 meter / 1')
+            distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)) * 3600 * 30.864;
             
             rlist.restaurant[i].distance = distance_i;
         }
