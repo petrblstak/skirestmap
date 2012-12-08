@@ -36,7 +36,7 @@ function mapInit() {
     
     map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);        
-    map.setCenter(pos);      
+    map.setCenter(pos);  
         
     var restaurant;
     var infowindow = new google.maps.InfoWindow({
@@ -231,6 +231,8 @@ function showRestList(){
 }
 function setActualRest(){    
     actualRest = event.target.id;
+    pos = new google.maps.LatLng(rlist.restaurant[actualRest].coordinate.latitude,
+        rlist.restaurant[actualRest].coordinate.longitude);
 }
 
 function showDetail(){
