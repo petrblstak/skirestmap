@@ -115,26 +115,22 @@ function sortList(type)
             if(rlist.restaurant[i].type[j] == "Korean")
             {
                 temp_array[0] = 1;
-                break;
             }    
             else if(rlist.restaurant[i].type[j] == "Chinese")
             {
                 temp_array[1] = 1;
-                break;
             }
             else if(rlist.restaurant[i].type[j] == "Japanese")
             {
                 temp_array[2] = 1;
-                break;
             }
             else if(rlist.restaurant[i].type[j] == "Western")
             {
                 temp_array[3] = 1;
-                break;
             }
         }
         
-        if(temp_array[0] == types[0] || temp_array[1] == types[1] || temp_array[2] == type[2] || temp_array[3] == type[3])
+        if(temp_array[0] == types[0] || temp_array[1] == types[1] || temp_array[2] == types[2] || temp_array[3] == types[3])
         {
             list_ref[count] = i;
             count++;
@@ -188,21 +184,23 @@ function sortList(type)
                 if(distance_i > distance_j)
                 {
                     var temp;
-                    list_ref[i] = temp;
+                    temp = list_ref[i];
                     list_ref[i] = list_ref[j];
                     list_ref[j] = temp;
                 }
             }
         }
+    
+        alert("complete sorting by distance");
     }
-    else if(type == 2) // Dedscending Rank Order
+    else if(type == 2) // Descending Rank Order
     { 
         alert("descending rank order");
         for (var i = 0; i < array_length; i++)
         {
             for(var j = i+1; j < array_length; j++)
             {
-                if(rlist.restaurant[list_ref[i]].rank < rlist.restaurant[list_ref[j]].rank)
+                if(rlist.restaurant[list_ref[i]].grade < rlist.restaurant[list_ref[j]].grade)
                 {
                     var temp;
                     temp = list_ref[i];
