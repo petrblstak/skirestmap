@@ -1,6 +1,10 @@
 // main vars
 // funtions
 
+// distance and rating into list -> to the right
+// fix footer and map loading bottom gap
+// changing footer
+
 //global variables
 var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
@@ -108,6 +112,7 @@ function handleNoGeolocation(errorFlag) {
 
 function sortList(type)
 {
+    sorting = type;
     var count = 0;
     var i,j, temp;
     var fresh_list = new Array();
@@ -154,7 +159,6 @@ function sortList(type)
     }
     else if(type == 1) // Ascending Distance Order
     {
-        alert("1");
         // need to get a location data(var whereIAM[2]) where the user is now. whereIAm[0] => latitude, whereIAm[1] = longitude
         var whereIAm = new Array();
         whereIAm[0] = 0; // temporarily
@@ -187,8 +191,6 @@ function sortList(type)
                 }
             }
         }
-    
-        alert("complete sorting by distance");
     }
     else if(type == 2) // Descending Rank Order
     { 
@@ -222,10 +224,21 @@ function showRestList(){
     for (var i=0, len = list_ref.length; i < len; ++i) {
         var row = document.createElement("li");
         var link = document.createElement("a");
+        var span = document.createElement("span");
+        span.setAttribute("class","right-list");
+        if(sorting){
+            if(sorting == 1){
+                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].distance));
+            } 
+            else if (sorting == 2){    
+                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].grade));
+            }
+        }
         link.setAttribute("href","detail.html");
         link.setAttribute("id",i);
         link.setAttribute("onclick","setActualRest()");
         link.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].name));
+        link.appendChild(span);
         row.appendChild(link);
         elem.appendChild(row);
     }    
