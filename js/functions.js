@@ -5,9 +5,11 @@
 var rlist = new Object(); // actual restaurants list
 var list_ref = new Array(); // reference of 'list' variable
 var types = new Array(1,1,1,1); //"Korean", "Chinese", "Japanese", "Western" // 0 is unchecked, 1 is checked
-var actualRest = null;
-var map;
-var pos;
+var actualRest = null; // actually selected restaurant
+var map; // map reference
+var pos; // actual coordinates of my position
+var sorting = 0; // initial sortig type
+var debudMode = true;
 
 $(function() { 
     $('#map_page').live("pageshow", function() {
@@ -15,7 +17,6 @@ $(function() {
     });
     $('#detail_page').live("pagecreate", function() {
         showDetail(); 
-        showcoord();
     });
     $('#list_page').live("pagecreate", function() {
         showRestList();
@@ -26,41 +27,70 @@ $(function() {
 
 function mapInit() {
     var mapOptions = {
-        zoom: 6,
+        zoom: 14,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    
     map = new google.maps.Map(document.getElementById('map_canvas'),
-        mapOptions);
+        mapOptions);        
+    map.setCenter(pos);      
         
-    map.setCenter(pos);
+    var restaurant;
+    var infowindow = new google.maps.InfoWindow({
+        maxWidth: 200
+    });
+    
+    for (var i=0, len = list_ref.length; i < len; ++i) {
+        
+        restaurant = rlist.restaurant[list_ref[i]];
+
+        var type = restaurant.type[0];
+        for (var j = 1; j < restaurant.type.length; j++){
+            type = type + ", " + restaurant.type[j];
+        }
+        
+        var link = '<a href="detail.html", id="'+i+'", onclick="setActualRest()">More...</a>';        
+        var content = "<h2>"+restaurant.name+"</h2><p>Phone: "+restaurant.tel+"<br/>Ranking: "+restaurant.grade+"<br/>Type: "+type+"<br/><br/>"+link+"</p>";
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(restaurant.coordinate.latitude,restaurant.coordinate.longitude),
+            map: map,
+            html: content
+        });
+        
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(this.html);
+            infowindow.open(map, this);
+        });
+    }
 }
 
 function initialize() {
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            pos = new google.maps.LatLng(position.coords.latitude,
-                position.coords.longitude);  
-                
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Location found using HTML5.'
-            });
+    if (debudMode){
+        pos = new google.maps.LatLng(37.580909,128.333352);
+    }
+    else {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                pos = new google.maps.LatLng(position.coords.latitude,
+                    position.coords.longitude);  
 
-        }, function() {
-            handleNoGeolocation(true);
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleNoGeolocation(false);
+            }, function() {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
     }
 }
 
 function handleNoGeolocation(errorFlag) {
+    var content;
     if (errorFlag) {
-        var content = 'Error: The Geolocation service failed.';
+        content = 'Error: The Geolocation service failed.';
     } else {
-        var content = 'Error: Your browser doesn\'t support geolocation.';
+        content = 'Error: Your browser doesn\'t support geolocation.';
     }
 
     var options = {
@@ -188,7 +218,8 @@ function sortList(type)
 function initRestList(){    
     $.getJSON('doc/list.json', function(data)
     { 
-        rlist = jQuery.extend(true, {}, data);
+        rlist = jQuery.extend(true, {}, data);        
+        sortList(sorting);
     });
 }
 
@@ -213,7 +244,11 @@ function setActualRest(){
 function showDetail(){
     var restaurant = rlist.restaurant[list_ref[actualRest]];
     document.getElementById("detail_title").appendChild(document.createTextNode(restaurant.name));
-    var content = "Phone: "+restaurant.tel+"\nRanking: "+restaurant.grade+"\nType: "+restaurant.type[0]+"\nCoordinates: "+restaurant.coordinate.latitude+", "+restaurant.coordinate.longitude+"\n\nReview:\n"+restaurant.comment;
+    var type = restaurant.type[0];
+    for (var i = 1; i < restaurant.type.length; i++){
+        type = type + ", " + restaurant.type[i];
+    }
+    var content = "Phone: "+restaurant.tel+"\nRanking: "+restaurant.grade+"\nType: "+type+"\nCoordinates: "+restaurant.coordinate.latitude+", "+restaurant.coordinate.longitude+"\n\nReview:\n"+restaurant.comment;
     document.getElementById("detail_content").innerText = content; 
 }
 
