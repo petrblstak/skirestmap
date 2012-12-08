@@ -167,18 +167,19 @@ function sortList(type)
             x0 = whereIAm[0];
             y0 = whereIAm[1];
             x1 = rlist.restaurant[list_ref[i]].coordinate.latitude;
-            y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;               
+            y1 = rlist.restaurant[list_ref[i]].coordinate.longitude;   
+            
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
             distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
-                
+            
+            rlist.restaurant[i].distance = distance_i;
+        }
+        
+        for(i = 0; i < array_length; i++)
+        {
             for(j = i + 1; j < array_length; j++)
             {
-                var distance_j;
-                x1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
-                y1 = rlist.restaurant[list_ref[j]].coordinate.latitude;
-                distance_j = Math.sqrt((x1 - x0)*(x1 - x0) + (y1 - y0)*(y1 - y0));
-                        
-                if(distance_i > distance_j)
+                if(rlist.restaurant[i].distance > rlist.restaurant[j].distance)
                 {
                     temp = list_ref[i];
                     list_ref[i] = list_ref[j];
