@@ -160,8 +160,7 @@ function sortList(type)
         whereIAm[0] = 0; // temporarily
         whereIAm[1] = 0; // temporarily
         
-        // input distance from where the user is into each rlist.restaurant[i].distance
-        for(var i = 0; i< array_length; i++)
+        for(i = 0; i < array_length; i++)
         {
             var x0, y0; // x0, y0 is whereIAm(the locationg where the user is)    
             var x1, y1;
@@ -176,9 +175,9 @@ function sortList(type)
             rlist.restaurant[i].distance = distance_i;
         }
         
-        for(var i = 0; i < array_length; i++)
+        for(i = 0; i < array_length; i++)
         {
-            for(var j = i + 1; j < array_length; j++)
+            for(j = i + 1; j < array_length; j++)
             {
                 if(rlist.restaurant[i].distance > rlist.restaurant[j].distance)
                 {
