@@ -232,10 +232,10 @@ function showRestList(){
         span.setAttribute("class","right-list");
         if(sorting){
             if(sorting == 1){
-                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].distance));
+                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].distance + " m"));
             } 
             else if (sorting == 2){    
-                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].grade));
+                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].grade + " stars"));
             }
         }
         link.setAttribute("href","detail.html");
