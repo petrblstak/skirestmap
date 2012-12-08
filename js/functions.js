@@ -183,7 +183,7 @@ function sortList(type)
         {
             for(j = i + 1; j < array_length; j++)
             {
-                if(rlist.restaurant[i].distance > rlist.restaurant[j].distance)
+                if(rlist.restaurant[list_ref[i]].distance > rlist.restaurant[list_ref[j]].distance)
                 {
                     temp = list_ref[i];
                     list_ref[i] = list_ref[j];
@@ -198,7 +198,7 @@ function sortList(type)
     { 
         for (i = 0; i < array_length; i++)
         {
-            for(j = i+1; j < array_length; j++)
+            for(j = 1; j < array_length; j++)
             {
                 if(rlist.restaurant[list_ref[i]].grade < rlist.restaurant[list_ref[j]].grade)
                 {
