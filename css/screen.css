@@ -62,3 +62,29 @@
     margin-right: 20px;
 }
 
+.stars5 {
+    background:url(pagination.png) no-repeat 0 -182px;
+    height:22px;
+    width:122px;
+}
+.stars4 {
+    background:url(pagination.png) no-repeat 0 -182px;
+    height:22px;
+    width:98px;
+}
+.stars3 {
+    background:url(pagination.png) no-repeat 0 -182px;
+    height:22px;
+    width:74px;
+}
+.stars2 {
+    background:url(pagination.png) no-repeat 0 -182px;
+    height:22px;
+    width:49px;
+}
+.stars1 {
+    background:url(pagination.png) no-repeat 0 -182px;
+    height:22px;
+    width:24px;
+}
+

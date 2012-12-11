@@ -19,6 +19,9 @@ $(function() {
     $('#map_page').live("pageshow", function() {
         mapInit();
     });
+    $('#map_page').live("pageshow", function() {
+        setCanvas();
+    });
     $('#detail_page').live("pagecreate", function() {
         showDetail(); 
     });
@@ -108,6 +111,14 @@ function handleNoGeolocation(errorFlag) {
 
     var infowindow = new google.maps.InfoWindow(options);
     map.setCenter(options.position);
+}
+
+function setCanvas(){
+    var elem = document.getElementById("map_canvas");
+    var height = screen.height - 98;
+    $("#map_canvas").css('height' , height);
+    //elem.setAttribute("style", "height: " + height + "px;")
+    google.maps.event.trigger(map, "resize");
 }
 
 function sortList(type)
@@ -235,7 +246,8 @@ function showRestList(){
                 span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].distance + " m"));
             } 
             else if (sorting == 2){    
-                span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].grade + " stars"));
+                //span.appendChild(document.createTextNode(rlist.restaurant[list_ref[i]].grade + "stars"));                
+                span.setAttribute("class","right-list stars"+rlist.restaurant[list_ref[i]].grade);
             }
         }
         link.setAttribute("href","detail.html");
