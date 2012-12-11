@@ -115,7 +115,7 @@ function handleNoGeolocation(errorFlag) {
 
 function setCanvas(){
     var elem = document.getElementById("map_canvas");
-    var height = screen.height - 98;
+    var height = screen.height - 93;
     $("#map_canvas").css('height' , height);
     //elem.setAttribute("style", "height: " + height + "px;")
     google.maps.event.trigger(map, "resize");
@@ -189,7 +189,7 @@ function sortList(type)
             var distance_i; // distance from whereIAm(where the user is) to the restaurant's location on array at i
             
             // distance in meter = x degree * (3600' / 1 degree) * (30.864 meter / 1')
-            distance_i = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)) * 3600 * 30.864;
+            distance_i = parseInt(Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)) * 3600 * 30.864);
             
             rlist.restaurant[i].distance = distance_i;
         }
@@ -211,7 +211,7 @@ function sortList(type)
     { 
         for (i = 0; i < array_length; i++)
         {
-            for(j = 1; j < array_length; j++)
+            for(j = i+1; j < array_length; j++)
             {
                 if(rlist.restaurant[list_ref[i]].grade < rlist.restaurant[list_ref[j]].grade)
                 {
